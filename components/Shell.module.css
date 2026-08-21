@@ -1,0 +1,89 @@
+.root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── HOME LAYOUT ── */
+.homeScreen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── SECTION LAYOUT ── */
+.appShell {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  height: 100%;
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 64px 72px;
+}
+
+.content::-webkit-scrollbar {
+  width: 4px;
+}
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.content::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 2px;
+}
+
+/* ── RESPONSIVE ── */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 180px;
+  }
+  .content {
+    padding: 48px 44px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .appShell {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .content {
+    padding: 32px 24px;
+    height: auto;
+    flex: 1;
+  }
+  .root {
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .content {
+    padding: 24px 18px;
+  }
+}
