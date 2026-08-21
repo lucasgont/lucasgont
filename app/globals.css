@@ -1,14 +1,33 @@
 :root {
-  --bg: #07090f;
-  --bg-surface: #0d1117;
-  --bg-hover: #131820;
-  --border: rgba(255, 255, 255, 0.06);
-  --border-active: rgba(255, 255, 255, 0.14);
-  --text: #edf2f7;
-  --text-secondary: #4a5568;
-  --text-muted: #2d3748;
-  --accent: #38bdf8;
-  --accent-dim: rgba(56, 189, 248, 0.1);
+  --bg: #0e0e0e;
+  --bg-surface: #191919;
+  --bg-hover: #222;
+  --bg-active: rgba(224, 224, 224, 0.93);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-active: rgba(255, 255, 255, 0.22);
+  --text: #d4d4d4;
+  --text-secondary: #5e5e5e;
+  --text-muted: #2a2a2a;
+  --text-on-active: #0e0e0e;
+  --accent: #c9a227;
+  --accent-dim: rgba(201, 162, 39, 0.12);
+
+  /* Diagonal stripes — gold accent version */
+  --stripe-gold: repeating-linear-gradient(
+    -45deg,
+    rgba(201, 162, 39, 0.55) 0px,
+    rgba(201, 162, 39, 0.55) 3px,
+    transparent 3px,
+    transparent 7px
+  );
+  /* Subtle version for hover overlays */
+  --stripe-subtle: repeating-linear-gradient(
+    -45deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0.18) 6px
+  );
 }
 
 *,
@@ -28,11 +47,25 @@ body {
 
 body {
   background-color: var(--bg);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-  background-size: 28px 28px;
   color: var(--text);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* CRT scanline texture — very subtle */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.032) 2px,
+    rgba(0, 0, 0, 0.032) 3px
+  );
 }
 
 a {
@@ -53,8 +86,7 @@ textarea {
   font: inherit;
 }
 
-/* On mobile allow scrolling in main content */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   html,
   body {
     overflow: auto;

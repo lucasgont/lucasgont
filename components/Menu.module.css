@@ -1,195 +1,256 @@
-/* ─── BASE ─── */
+/* -- Shared base -- */
 .menu {
+  font-family: var(--font-geist-mono);
+}
+
+/* -----------------------------------------
+   HOME MODE � full-screen centered panel
+----------------------------------------- */
+.home {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 40px 32px;
-  gap: 40px;
-}
-
-.brand {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.brandLink {
-  display: inline-block;
-}
-
-.brandName {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--text);
-  transition: color 0.2s;
-}
-
-.brandLink:hover .brandName {
-  color: var(--accent);
-}
-
-.brandRole {
-  font-size: 12px;
-  color: var(--text-secondary);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.item {
+  gap: 0;
+  min-width: 300px;
+  width: clamp(280px, 34vw, 420px);
   position: relative;
+}
+
+/* Top gold stripe */
+.home::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: var(--stripe-gold);
+}
+
+/* Bottom gold stripe */
+.home::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: var(--stripe-gold);
+}
+
+/* Brand area */
+.home .brand {
+  padding: 20px 24px 16px;
+  border: 1px solid var(--border-active);
+  border-bottom: none;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.home .brandName {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.home .brandRole {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+/* Nav panel */
+.home .nav {
+  border: 1px solid var(--border-active);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.home .item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 9px 0;
-  cursor: pointer;
+  padding: 0 24px;
+  height: 52px;
+  position: relative;
   overflow: hidden;
-}
-
-.indicator {
-  position: absolute;
-  left: -32px;
-  width: 2px;
-  height: 100%;
-  background: var(--accent);
-  border-radius: 0 2px 2px 0;
-}
-
-.label {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  color: var(--text-secondary);
-  display: inline-block;
-  transition: color 0.2s;
-}
-
-.item:hover .label {
-  color: var(--text);
-}
-
-.item.active .label {
-  color: var(--text);
-  font-weight: 600;
-}
-
-.hint {
-  font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-/* ─── HOME MODE ─── */
-.menu.home {
-  align-items: flex-start;
-  justify-content: center;
-  gap: 48px;
-  padding: 0 48px;
-  max-width: 380px;
-  width: 100%;
-  height: auto;
-}
-
-.menu.home .brandName {
-  font-size: 32px;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-}
-
-.menu.home .brandRole {
-  font-size: 13px;
-}
-
-.menu.home .nav {
-  gap: 0;
-}
-
-.menu.home .item {
-  padding: 13px 0;
   border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
 }
 
-.menu.home .item:first-child {
-  border-top: 1px solid var(--border);
+.home .item:last-child {
+  border-bottom: none;
 }
 
-.menu.home .label {
+.home .item:hover {
+  background: var(--bg-active);
+  color: var(--text-on-active);
+}
+
+/* Stripe flash on hover */
+.home .item::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 32px;
+  background: var(--stripe-subtle);
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+
+.home .item:hover::after {
+  opacity: 1;
+}
+
+.home .label {
   font-size: 13px;
-  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+}
+
+/* Hint */
+.hint {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 10px 24px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--border-active);
+  border-top: none;
+}
+
+/* -----------------------------------------
+   SIDEBAR MODE
+----------------------------------------- */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0;
+  height: 100%;
+}
+
+.sidebar .brand {
+  padding: 0 20px 24px;
+  margin-bottom: 4px;
+}
+
+.sidebar .brandLink {
+  display: block;
+}
+
+.sidebar .brandName {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.sidebar .brandRole {
+  display: none;
+}
+
+.sidebar .nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .item {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border-left: 2px solid transparent;
+}
+
+.sidebar .item:hover:not(.active) {
+  background: var(--bg-hover);
+  border-left-color: var(--border-active);
+}
+
+.sidebar .active {
+  background: var(--bg-active);
+  color: var(--text-on-active);
+  border-left-color: var(--accent);
+}
+
+.sidebar .active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 24px;
+  background: var(--stripe-subtle);
+}
+
+.sidebar .label {
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  font-weight: 600;
+  display: block;
+  position: relative;
+  z-index: 1;
 }
 
-.menu.home .item:hover .label {
-  color: var(--text);
+/* Active indicator (layoutId) */
+.indicator {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-active);
+  z-index: 0;
 }
 
-.menu.home .hint {
-  font-size: 10px;
-  letter-spacing: 0.12em;
-}
-
-/* ─── SIDEBAR MODE ─── */
-.menu.sidebar {
-  padding: 40px 28px;
-  justify-content: flex-start;
-}
-
-/* ─── MOBILE ─── */
+/* -- Responsive -- */
 @media (max-width: 640px) {
-  .menu.sidebar {
+  .sidebar {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 24px;
-    gap: 0;
+    flex-wrap: nowrap;
+    padding: 0;
     height: auto;
+    overflow-x: auto;
   }
-
-  .menu.sidebar .brand {
-    gap: 2px;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .menu.sidebar .brandName {
-    font-size: 13px;
-  }
-
-  .menu.sidebar .nav {
-    flex-direction: row;
-    gap: 0;
-  }
-
-  .menu.sidebar .item {
-    padding: 8px 12px;
-  }
-
-  .menu.sidebar .indicator {
+  .sidebar .brand {
     display: none;
   }
-
-  .menu.sidebar .label {
-    font-size: 12px;
+  .sidebar .nav {
+    flex-direction: row;
+    width: 100%;
+  }
+  .sidebar .item {
+    flex: 1;
+    height: 40px;
+    padding: 0 10px;
+    justify-content: center;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+  .sidebar .item:hover:not(.active) {
+    border-left-color: transparent;
+    border-bottom-color: var(--border-active);
+  }
+  .sidebar .active {
+    border-left-color: transparent;
+    border-bottom-color: var(--accent);
+  }
+  .sidebar .label {
+    font-size: 10px;
+  }
+  .home {
+    width: min(90vw, 340px);
+  }
+  .home .item {
+    height: 46px;
   }
 }
-
-@media (max-width: 400px) {
-  .menu.home {
-    padding: 0 28px;
-  }
-
-  .menu.home .brandName {
-    font-size: 26px;
-  }
-}
-

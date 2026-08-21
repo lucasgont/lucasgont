@@ -1,11 +1,86 @@
 .root {
   position: relative;
+  z-index: 1;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-/* ── HOME LAYOUT ── */
+/* ── HUD bar ── */
+.hud {
+  flex-shrink: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-family: var(--font-geist-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.55);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+/* Gold diagonal stripe accent under HUD */
+.hud::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--stripe-gold);
+  opacity: 0.35;
+  z-index: 1;
+}
+
+.hudLeft,
+.hudRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hudCenter {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text);
+}
+
+.hudDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  animation: dotPulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+.sep {
+  opacity: 0.3;
+}
+
+/* ── Body below HUD ── */
+.body {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Home screen ── */
 .homeScreen {
   position: absolute;
   inset: 0;
@@ -14,7 +89,7 @@
   justify-content: center;
 }
 
-/* ── SECTION LAYOUT ── */
+/* ── Section layout ── */
 .appShell {
   position: absolute;
   inset: 0;
@@ -25,8 +100,22 @@
   width: 220px;
   flex-shrink: 0;
   height: 100%;
-  border-right: 1px solid var(--border);
   overflow: hidden;
+  position: relative;
+  border-right: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Gold stripe on the right edge of sidebar */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--stripe-gold);
+  opacity: 0.22;
 }
 
 .content {
@@ -34,56 +123,31 @@
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 64px 72px;
+  padding: 52px 68px;
 }
 
-.content::-webkit-scrollbar {
-  width: 4px;
-}
-.content::-webkit-scrollbar-track {
-  background: transparent;
-}
-.content::-webkit-scrollbar-thumb {
-  background: var(--border-active);
-  border-radius: 2px;
-}
+.content::-webkit-scrollbar        { width: 3px; }
+.content::-webkit-scrollbar-track  { background: transparent; }
+.content::-webkit-scrollbar-thumb  { background: var(--border-active); }
 
-/* ── RESPONSIVE ── */
-
-/* Tablet */
+/* ── Responsive ── */
 @media (max-width: 900px) {
-  .sidebar {
-    width: 180px;
-  }
-  .content {
-    padding: 48px 44px;
-  }
+  .sidebar  { width: 190px; }
+  .content  { padding: 40px 40px; }
 }
 
-/* Mobile */
 @media (max-width: 640px) {
-  .appShell {
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  .content {
-    padding: 32px 24px;
-    height: auto;
-    flex: 1;
-  }
-  .root {
-    overflow-y: auto;
-  }
+  .hud         { padding: 0 12px; }
+  .hudCenter   { display: none; }
+  .appShell    { flex-direction: column; }
+  .sidebar     { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+  .sidebar::after { display: none; }
+  .content     { padding: 24px 18px; height: auto; flex: 1; }
+  .body        { overflow-y: auto; }
+  .root        { overflow-y: auto; }
 }
 
-@media (max-width: 400px) {
-  .content {
-    padding: 24px 18px;
-  }
+@media (max-width: 380px) {
+  .content { padding: 18px 14px; }
+  .hudLeft span:not(.hudDot):not(:first-of-type) { display: none; }
 }

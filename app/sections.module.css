@@ -1,48 +1,76 @@
-/* Shared section styles */
+/* Shared section styles � game UI aesthetic */
 
 .page {
   max-width: 680px;
+  font-family: var(--font-geist-sans);
 }
 
+/* -- Section label -- */
 .label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-geist-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  gap: 8px;
 }
 
+.label::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* -- Title -- */
 .title {
-  font-size: 38px;
+  font-size: 34px;
   font-weight: 300;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   line-height: 1.1;
   color: var(--text);
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
+/* -- Body text -- */
 .body {
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 14px;
+  line-height: 1.8;
   color: var(--text-secondary);
-  max-width: 540px;
+  max-width: 520px;
 }
 
+/* -- Divider -- */
 .divider {
-  width: 32px;
+  position: relative;
+  margin: 40px 0;
   height: 1px;
-  background: var(--border-active);
-  margin: 36px 0;
+  background: var(--border);
 }
 
-/* ── GRID / CARDS ── */
+.divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 40px;
+  height: 3px;
+  background: var(--stripe-gold);
+}
+
+/* -- GRID / CARDS -- */
 .grid {
   display: grid;
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
-  margin-top: 36px;
+  margin-top: 32px;
 }
 
 .grid2 {
@@ -51,57 +79,77 @@
 
 .card {
   background: var(--bg-surface);
-  padding: 28px;
-  transition: background 0.2s;
+  padding: 24px;
+  transition: background 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent);
+  transition: width 0.22s;
 }
 
 .card:hover {
   background: var(--bg-hover);
 }
 
+.card:hover::after {
+  width: 40%;
+}
+
 .cardLabel {
-  font-size: 10px;
+  font-family: var(--font-geist-mono);
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
 .cardTitle {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
 }
 
 .cardText {
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text-secondary);
 }
 
-/* ── TAGS ── */
+/* -- TAGS -- */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
+  gap: 5px;
+  margin-top: 12px;
 }
 
 .tag {
-  font-size: 11px;
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 3px 9px;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
   border: 1px solid var(--border-active);
   color: var(--text-secondary);
-  border-radius: 2px;
+  text-transform: uppercase;
 }
 
-/* ── LIST ROWS ── */
+/* -- LIST ROWS -- */
 .rows {
-  margin-top: 36px;
+  margin-top: 32px;
   border-top: 1px solid var(--border);
 }
 
@@ -109,28 +157,55 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 18px 0;
+  padding: 16px 0;
   border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
 }
 
 .rowLink {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 18px 0;
+  padding: 14px 12px;
   border-bottom: 1px solid var(--border);
-  transition: opacity 0.2s;
+  transition: background 0.15s, color 0.15s;
   width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .rowLink:hover {
-  opacity: 0.7;
+  background: var(--bg-active);
+  color: var(--text-on-active);
+}
+
+.rowLink:hover .rowArrow,
+.rowLink:hover .rowTitle,
+.rowLink:hover .rowSub,
+.rowLink:hover .rowIcon {
+  color: var(--text-on-active);
+  border-color: rgba(0,0,0,0.2);
+  background: transparent;
+}
+
+.rowLink::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 28px;
+  background: var(--stripe-subtle);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.rowLink:hover::after {
+  opacity: 1;
 }
 
 .rowIcon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,6 +213,7 @@
   background: var(--bg-surface);
   font-size: 15px;
   flex-shrink: 0;
+  transition: color 0.15s, border-color 0.15s;
 }
 
 .rowMeta {
@@ -146,37 +222,40 @@
 
 .rowTitle {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text);
-  margin-bottom: 2px;
+  margin-bottom: 1px;
+  transition: color 0.15s;
 }
 
 .rowSub {
-  font-size: 12px;
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
   color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  transition: color 0.15s;
 }
 
 .rowArrow {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
-  transition: transform 0.2s, color 0.2s;
+  transition: transform 0.18s, color 0.15s;
 }
 
 .rowLink:hover .rowArrow {
-  transform: translateX(3px);
-  color: var(--text);
+  transform: translateX(4px);
 }
 
-/* ── CV TIMELINE ── */
+/* -- CV TIMELINE -- */
 .timeline {
-  margin-top: 36px;
+  margin-top: 32px;
 }
 
 .timeEntry {
   display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 24px;
-  padding: 20px 0;
+  grid-template-columns: 68px 1fr;
+  gap: 20px;
+  padding: 18px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -185,11 +264,12 @@
 }
 
 .entryYear {
-  font-size: 12px;
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--accent);
   padding-top: 2px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .entryTitle {
@@ -200,37 +280,58 @@
 }
 
 .entryOrg {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
+  letter-spacing: 0.02em;
 }
 
-/* ── BUTTON ── */
+/* -- BUTTON -- */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 11px 22px;
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 24px;
   border: 1px solid var(--border-active);
   color: var(--text);
   background: var(--bg-surface);
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-  margin-top: 36px;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  margin-top: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 24px;
+  background: var(--stripe-subtle);
+  opacity: 0;
+  transition: opacity 0.15s;
 }
 
 .btn:hover {
-  background: var(--bg-hover);
+  background: var(--bg-active);
+  color: var(--text-on-active);
   border-color: var(--accent);
-  color: var(--accent);
 }
 
-/* ── RESPONSIVE ── */
+.btn:hover::after {
+  opacity: 1;
+}
+
+/* -- RESPONSIVE -- */
 @media (max-width: 900px) {
   .title {
-    font-size: 30px;
+    font-size: 28px;
   }
   .grid2 {
     grid-template-columns: 1fr;
@@ -239,14 +340,14 @@
 
 @media (max-width: 640px) {
   .title {
-    font-size: 26px;
-    margin-bottom: 16px;
+    font-size: 24px;
+    margin-bottom: 14px;
   }
   .card {
-    padding: 20px;
+    padding: 18px;
   }
   .timeEntry {
-    grid-template-columns: 56px 1fr;
-    gap: 16px;
+    grid-template-columns: 52px 1fr;
+    gap: 14px;
   }
 }
