@@ -22,7 +22,7 @@ export default function ContactPage() {
       <motion.p {...item(0)} className={s.label}>Contact</motion.p>
       <motion.h1 {...item(0.07)} className={s.title}>Let's work together</motion.h1>
       <motion.p {...item(0.14)} className={s.body}>
-        Open to freelance projects, full-time roles, and interesting collaborations.
+        Open to freelance work, full-time roles, and interesting collaborations.
         Reach out through any of the channels below.
       </motion.p>
 

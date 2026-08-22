@@ -23,6 +23,7 @@
   letter-spacing: 0.02em;
   color: var(--text);
   transition: color 0.2s;
+  text-transform: uppercase;
 }
 
 .brandLink:hover .brandName {
@@ -34,6 +35,7 @@
   color: var(--text-secondary);
   font-weight: 400;
   letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 .nav {
@@ -49,7 +51,6 @@
   gap: 12px;
   padding: 9px 0;
   cursor: pointer;
-  overflow: hidden;
 }
 
 .indicator {
@@ -92,7 +93,7 @@
   justify-content: center;
   gap: 48px;
   padding: 0 48px;
-  max-width: 380px;
+  max-width: 500px;
   width: 100%;
   height: auto;
 }
@@ -113,11 +114,11 @@
 
 .menu.home .item {
   padding: 13px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
 }
 
-.menu.home .item:first-child {
-  border-top: 1px solid var(--border);
+.menu.home .nav > :last-child .item {
+  border-bottom: 0px;
 }
 
 .menu.home .label {

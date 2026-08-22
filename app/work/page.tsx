@@ -36,11 +36,11 @@ const projects = [
   },
 ];
 
-export default function ProjectsPage() {
+export default function WorkPage() {
   return (
     <div className={s.page}>
       <motion.p {...item(0)} className={s.label}>Work</motion.p>
-      <motion.h1 {...item(0.07)} className={s.title}>Selected projects</motion.h1>
+      <motion.h1 {...item(0.07)} className={s.title}>Selected work</motion.h1>
 
       <motion.div {...item(0.14)} className={`${s.grid} ${s.grid2}`}>
         {projects.map((p) => (
