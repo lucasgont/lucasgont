@@ -101,7 +101,7 @@ export default function Menu({ isHome = false, pathname = "" }: MenuProps) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
             >
-                Built with curiosity, shipped with intention.
+                I build with curiosity and intention.
             </motion.p>
         </div>
     );
