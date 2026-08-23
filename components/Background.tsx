@@ -45,7 +45,7 @@ export default function Background() {
       ctx.stroke();
 
       // ── Sweep line ──
-      const period = 360; // ticks per full sweep
+      const period = 720; // ticks per full sweep
       const scanY = ((tick % period) / period) * (H + 140) - 70;
       const sg = ctx.createLinearGradient(0, scanY - 60, 0, scanY + 60);
       sg.addColorStop(0,    "rgba(255,255,255,0)");

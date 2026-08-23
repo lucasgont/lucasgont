@@ -1,4 +1,7 @@
-// Home renders nothing — the Shell shows the full-screen start menu when pathname is "/"
+import Content from "@/components/Content";
+
 export default function HomePage() {
-  return null;
+    return (
+        <Content />
+    )
 }

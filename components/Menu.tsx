@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import styles from "./Menu.module.css";
 
 const NAV = [
-    { href: "/work", label: "Work" },
-    { href: "/about", label: "About" },
-    { href: "/cv", label: "CV" },
-    { href: "/contact", label: "Contact" },
+    { href: "#work", label: "Work" },
+    { href: "#about", label: "About" },
+    { href: "#contact", label: "Contact" },
+    { href: "#cv", label: "CV" },
 ];
 
 interface MenuProps {
@@ -17,6 +17,17 @@ interface MenuProps {
 }
 
 export default function Menu({ isHome = false, pathname = "" }: MenuProps) {
+    const handleNavClick = (href: string) => {
+        if (isHome || pathname === "/") {
+            // On homepage - use smooth scroll to anchor
+            const elementId = href.replace("#", "");
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    };
+
     return (
         <div className={`${styles.menu} ${isHome ? styles.home : styles.sidebar}`}>
 
@@ -27,19 +38,18 @@ export default function Menu({ isHome = false, pathname = "" }: MenuProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <Link href="/" className={styles.brandLink}>
+                <h1 className={styles.brandLink}>
                     <span className={styles.brandName}>Lucas Gontijo</span>
-                </Link>
-                {isHome && (
-                    <motion.p
-                        className={styles.brandRole}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.25, duration: 0.5 }}
-                    >
-                        Software Engineer | Full-Stack Developer
-                    </motion.p>
-                )}
+                </h1>
+
+                <motion.p
+                    className={styles.brandRole}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.25, duration: 0.5 }}
+                >
+                    Software Engineer | Full-Stack Developer
+                </motion.p>
             </motion.div>
 
             {/* Nav */}
@@ -57,8 +67,12 @@ export default function Menu({ isHome = false, pathname = "" }: MenuProps) {
                                 ease: [0.25, 0.46, 0.45, 0.94],
                             }}
                         >
-                            <Link
+                            <a
                                 href={item.href}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleNavClick(item.href);
+                                }}
                                 className={`${styles.item} ${active ? styles.active : ""}`}
                             >
                                 {active && !isHome && (
@@ -75,23 +89,20 @@ export default function Menu({ isHome = false, pathname = "" }: MenuProps) {
                                 >
                                     {item.label}
                                 </motion.span>
-                            </Link>
+                            </a>
                         </motion.div>
                     );
                 })}
             </nav>
 
-            {/* Footer */}
-            {isHome && (
-                <motion.p
-                    className={styles.hint}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.7, duration: 0.6 }}
-                >
-                    Built with curiosity, shipped with intention.
-                </motion.p>
-            )}
+            <motion.p
+                className={styles.hint}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
+            >
+                Built with curiosity, shipped with intention.
+            </motion.p>
         </div>
     );
 }

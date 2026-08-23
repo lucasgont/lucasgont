@@ -1,0 +1,170 @@
+.root {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── HOME LAYOUT (Single page scroll) ── */
+.scrollContainer {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollContainer::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 3px;
+}
+
+.homeScreen {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sectionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  padding: 64px 72px;
+  align-items: center;
+}
+
+.sectionsWrapper section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  scroll-margin-top: 120px;
+}
+
+/* ── SIDEBAR (Hidden initially, shown on scroll) ── */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg);
+  z-index: 10;
+  padding: 32px 24px;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 2px;
+}
+
+/* ── SECTION LAYOUT ── */
+.appShell {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 64px 72px;
+  margin-left: 100px;
+}
+
+.content::-webkit-scrollbar {
+  width: 4px;
+}
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.content::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 2px;
+}
+
+/* ── RESPONSIVE ── */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 240px;
+  }
+  .root:has(.sidebar[style*="opacity: 1"]) .scrollContainer {
+    margin-left: 240px;
+  }
+  .sectionsWrapper {
+    padding: 48px 44px;
+  }
+  .content {
+    padding: 48px 44px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .appShell {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    padding: 16px 24px;
+  }
+  .root:has(.sidebar[style*="opacity: 1"]) .scrollContainer {
+    margin-left: 0;
+    margin-bottom: 100px;
+  }
+  .content {
+    padding: 32px 24px;
+    height: auto;
+    flex: 1;
+  }
+  .root {
+    overflow-y: auto;
+  }
+  .scrollContainer {
+    height: auto;
+  }
+  .sectionsWrapper {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .content {
+    padding: 24px 18px;
+  }
+  .sectionsWrapper {
+    padding: 24px 18px;
+  }
+}
