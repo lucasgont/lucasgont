@@ -22,7 +22,7 @@
 }
 
 .sidebar {
-  width: 220px;
+  width: 300px;
   flex-shrink: 0;
   height: 100%;
   border-right: 1px solid var(--border);
@@ -35,6 +35,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: 64px 72px;
+  margin-left: 100px;
 }
 
 .content::-webkit-scrollbar {
@@ -53,7 +54,7 @@
 /* Tablet */
 @media (max-width: 900px) {
   .sidebar {
-    width: 180px;
+    width: 240px;
   }
   .content {
     padding: 48px 44px;

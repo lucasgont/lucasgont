@@ -81,7 +81,7 @@ export default function Menu({ isHome = false, pathname = "" }: MenuProps) {
                 })}
             </nav>
 
-            {/* Footer hint on home */}
+            {/* Footer */}
             {isHome && (
                 <motion.p
                     className={styles.hint}
@@ -89,7 +89,7 @@ export default function Menu({ isHome = false, pathname = "" }: MenuProps) {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.7, duration: 0.6 }}
                 >
-                    Select an option
+                    Built with curiosity, shipped with intention.
                 </motion.p>
             )}
         </div>
