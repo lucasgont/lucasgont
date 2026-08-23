@@ -35,6 +35,16 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* CRT scanline fade out animation */
+@keyframes scanlineFadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 /* CRT scanline texture — very subtle */
 body::after {
     content: '';
@@ -45,8 +55,9 @@ body::after {
     background: repeating-linear-gradient(0deg,
             transparent 0px,
             transparent 2px,
-            rgba(0, 0, 0, 0.032) 2px,
-            rgba(0, 0, 0, 0.032) 3px);
+            rgba(0, 0, 0, 0.015) 2px,
+            rgba(0, 0, 0, 0.015) 3px);
+    animation: scanlineFadeOut 2s ease-in-out 6s forwards;
 }
 
 a {

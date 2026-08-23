@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Menu from "./Menu";
@@ -18,28 +19,37 @@ const item = (delay: number) => ({
 
 const projects = [
     {
+        title: "Vivage Clinique",
+        subtitle: "Freelance Full-Stack Developer · Dec 2025 – Apr 2026",
+        desc: "Led the complete development lifecycle of a multilingual corporate platform using Next.js, React, TypeScript and PostgreSQL, featuring 30+ pages and a dynamic treatment catalog. Implemented PT/EN internationalization, dynamic routing, SEO-focused architecture, and managed cloud infrastructure on Render.",
+        tags: ["Next.js", "React", "TypeScript", "PostgreSQL", "Render", "i18n", "SEO"],
+        images: ["/images/1.jpg", "/images/1.jpg"],
+        live: "https://vivage.pt",
+        github: "https://github.com/yourusername/vivage-clinique",
+    },
+    {
         title: "E-Commerce Platform",
         desc: "Full-stack storefront with cart, auth, and Stripe payments.",
         tags: ["Next.js", "PostgreSQL", "Stripe"],
-        href: "#",
+        images: ["/images/1.jpg", "/images/1.jpg"],
+        live: "#",
+        github: "https://github.com/yourusername/ecommerce-platform",
     },
     {
         title: "Task Manager",
         desc: "Real-time collaborative boards with drag-and-drop support.",
         tags: ["React", "WebSocket", "Redis"],
-        href: "#",
-    },
-    {
-        title: "Dev Portfolio",
-        desc: "This site — interactive game-style navigation with Framer Motion.",
-        tags: ["Next.js", "Framer Motion", "TypeScript"],
-        href: "#",
+        images: ["/images/1.jpg", "/images/1.jpg"],
+        live: "#",
+        github: "https://github.com/yourusername/task-manager",
     },
     {
         title: "Analytics Dashboard",
         desc: "Data visualisation tool for processing large event datasets.",
         tags: ["React", "D3.js", "Node.js"],
-        href: "#",
+        images: ["/images/1.jpg", "/images/1.jpg"],
+        live: "#",
+        github: "https://github.com/yourusername/analytics-dashboard",
     },
 ];
 
@@ -49,23 +59,57 @@ function WorkPage() {
             <motion.p {...item(0)} className={s.label}>Work</motion.p>
             <motion.h1 {...item(0.07)} className={s.title}>Selected work</motion.h1>
 
-            <motion.div {...item(0.14)} className={`${s.grid} ${s.grid2}`}>
+            <motion.div {...item(0.14)} className={`${s.grid} ${s.grid1}`}>
                 {projects.map((p) => (
-                    <motion.a
+                    <motion.div
                         key={p.title}
-                        href={p.href}
                         className={s.card}
-                        whileHover={{ scale: 1.01 }}
-                        transition={{ duration: 0.2 }}
                     >
-                        <p className={s.cardTitle}>{p.title}</p>
-                        <p className={s.cardText}>{p.desc}</p>
-                        <div className={s.tags}>
-                            {p.tags.map((t) => (
-                                <span key={t} className={s.tag}>{t}</span>
+                        <div className={s.cardImages}>
+                            {p.images.map((img, idx) => (
+                                <div key={idx} className={s.cardImage}>
+                                    <img src={img} alt={`${p.title} screenshot ${idx + 1}`} />
+                                </div>
                             ))}
                         </div>
-                    </motion.a>
+                        <div className={s.cardContent}>
+                            <p className={s.cardTitle}>{p.title}</p>
+                            <p className={s.cardText}>{p.desc}</p>
+                            <div className={s.tags}>
+                                {p.tags.map((t) => (
+                                    <span key={t} className={s.tag}>{t}</span>
+                                ))}
+                            </div>
+                            <div className={s.cardActions}>
+                                {p.live && p.live !== "#" && (
+                                    <a
+                                        href={p.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={s.btn}
+                                    >
+                                        Live Project
+                                    </a>
+                                )}
+                                {p.github && (
+                                    <a
+                                        href={p.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={s.btn}
+                                    >
+                                        GitHub
+                                    </a>
+                                )}
+                                <Link
+                                    href={`/work/${p.title.toLowerCase().replace(/\s+/g, "-")}`}
+                                    className={s.btn}
+                                >
+                                    See Project
+                                </Link>
+                            </div>
+                        </div>
+                    </motion.div>
                 ))}
             </motion.div>
         </div>
