@@ -7,8 +7,8 @@ import styles from "./Menu.module.css";
 const NAV = [
     { href: "#work", label: "Work" },
     { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
     { href: "#cv", label: "CV" },
+    { href: "#contact", label: "Contact" },
 ];
 
 interface MenuProps {
