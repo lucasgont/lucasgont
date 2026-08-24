@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LUCAS | NEXUS Division — Fullstack Developer",
+  title: "Lucas Gontijo",
   description:
-    "Fullstack developer specialized in solid backend architecture, clean code practices, and AI-augmented development. Building production-ready applications.",
+    "Fullstack developer specialized in turning complex requirements and business needs into practical, production-ready solutions. Building with curiosity and delivering with intention.",
 };
 
 export default function RootLayout({
