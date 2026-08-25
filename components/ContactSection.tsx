@@ -7,6 +7,24 @@ interface ContactSectionProps {
     onInView: () => void;
 }
 
+const GitHubIcon = () => (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+    </svg>
+);
+
+const LinkedInIcon = () => (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+);
+
+const EmailIcon = () => (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+    </svg>
+);
+
 export default function ContactSection({ onInView }: ContactSectionProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { amount: 0.2 });
@@ -36,6 +54,30 @@ export default function ContactSection({ onInView }: ContactSectionProps) {
     const inputClasses =
         "w-full bg-nx-surface/50 border border-nx-border rounded-lg px-4 py-3 font-mono text-sm text-nx-text focus:outline-none focus:border-nx-cyan/40 focus:shadow-[0_0_15px_rgba(0,212,255,0.08)] transition-all duration-300 placeholder:text-nx-text-muted/30";
 
+    const socialLinks = [
+        {
+            label: "GITHUB",
+            handle: "@lucasgont",
+            href: "https://github.com/lucasgont",
+            icon: GitHubIcon,
+            color: "from-slate-400 to-slate-300",
+        },
+        {
+            label: "LINKEDIN",
+            handle: "/in/lucasgont",
+            href: "https://www.linkedin.com/in/lucasgont/",
+            icon: LinkedInIcon,
+            color: "from-blue-400 to-blue-300",
+        },
+        {
+            label: "EMAIL",
+            handle: "gontijoguimaraeslucas@gmail.com",
+            href: "mailto:gontijoguimaraeslucas@gmail.com",
+            icon: EmailIcon,
+            color: "from-cyan-400 to-cyan-300",
+        },
+    ];
+
     return (
         <section
             ref={ref}
@@ -64,183 +106,55 @@ export default function ContactSection({ onInView }: ContactSectionProps) {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                    {/* Contact form */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="lg:col-span-3 glass-panel rounded-xl p-6 sm:p-8"
-                    >
-                        {/* Terminal header */}
-                        <div className="flex items-center gap-3 mb-6 pb-4 border-b border-nx-border">
-                            <div className="flex items-center gap-1.5">
-                                <div className="w-2 h-2 rounded-full bg-nx-red" />
-                                <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
-                                <div className="w-2 h-2 rounded-full bg-nx-green/60" />
-                            </div>
-                            <div className="flex items-center gap-2 ml-3">
-                                <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isTransmitting ? "bg-yellow-500 animate-pulse" : "bg-nx-green"
-                                    }`} />
-                                <span className="font-mono text-[10px] text-nx-text-muted tracking-wider">
-                                    {isTransmitting ? "TRANSMITTING..." : "CHANNEL OPEN"}
-                                </span>
-                            </div>
-                        </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-5">
-                            <div>
-                                <label className="font-mono text-[10px] text-nx-text-muted tracking-wider block mb-2">
-                                    CALLSIGN
-                                </label>
-                                <input
-                                    type="text"
-                                    value={formState.name}
-                                    onChange={(e) => setFormState((prev) => ({ ...prev, name: e.target.value }))}
-                                    required
-                                    className={inputClasses}
-                                    placeholder="Your name"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="font-mono text-[10px] text-nx-text-muted tracking-wider block mb-2">
-                                    FREQUENCY
-                                </label>
-                                <input
-                                    type="email"
-                                    value={formState.email}
-                                    onChange={(e) => setFormState((prev) => ({ ...prev, email: e.target.value }))}
-                                    required
-                                    className={inputClasses}
-                                    placeholder="your@email.com"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="font-mono text-[10px] text-nx-text-muted tracking-wider block mb-2">
-                                    TRANSMISSION
-                                </label>
-                                <textarea
-                                    value={formState.message}
-                                    onChange={(e) => setFormState((prev) => ({ ...prev, message: e.target.value }))}
-                                    required
-                                    rows={5}
-                                    className={`${inputClasses} resize-none`}
-                                    placeholder="Your message..."
-                                />
-                            </div>
-
-                            <button
-                                type="submit"
-                                disabled={isTransmitting}
-                                className="w-full py-3.5 rounded-lg font-mono text-sm tracking-[0.15em]
-                  bg-nx-cyan/10 border border-nx-cyan/30 text-nx-cyan
-                  hover:bg-nx-cyan/20 hover:shadow-[0_0_25px_rgba(0,212,255,0.15)]
-                  transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed
-                  relative overflow-hidden group"
-                            >
-                                {isTransmitting ? (
-                                    <span className="flex items-center justify-center gap-2">
-                                        <span className="animate-pulse">◉</span> TRANSMITTING...
-                                    </span>
-                                ) : transmitted ? (
-                                    <span className="text-nx-green flex items-center justify-center gap-2">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <polyline points="20 6 9 17 4 12" />
-                                        </svg>
-                                        TRANSMISSION RECEIVED
-                                    </span>
-                                ) : (
-                                    <>
-                                        <span className="relative z-10">TRANSMIT →</span>
-                                        <div className="absolute inset-0 bg-nx-cyan/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-                                    </>
-                                )}
-                            </button>
-                        </form>
-                    </motion.div>
-
-                    {/* Sidebar */}
+                <div className="grid grid-cols-1">
+                    {/* Direct links */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 }}
-                        className="lg:col-span-2 space-y-5"
+                        className="space-y-5"
                     >
-                        {/* Direct links */}
-                        <div className="glass-panel rounded-xl p-6">
-                            <div className="flex items-center gap-2 mb-5 pb-3 border-b border-nx-border">
+                        <div className="glass-panel rounded-xl p-8">
+                            <div className="flex items-center gap-2 mb-6 pb-4 border-b border-nx-border">
                                 <div className="w-1.5 h-1.5 bg-nx-cyan rounded-full" />
-                                <span className="font-mono text-[10px] text-nx-text-muted tracking-[0.2em]">DIRECT LINKS</span>
+                                <span className="font-mono text-[10px] text-nx-cyan tracking-[0.2em] font-semibold">DIRECT LINKS</span>
                             </div>
 
-                            <div className="space-y-2">
-                                {[
-                                    { label: "GITHUB", handle: "@lucas-dev", href: "https://github.com", icon: "⬡" },
-                                    { label: "LINKEDIN", handle: "/in/lucas", href: "https://linkedin.com", icon: "◈" },
-                                    { label: "EMAIL", handle: "hello@lucas.dev", href: "mailto:hello@lucas.dev", icon: "◇" },
-                                ].map((link) => (
-                                    <a
-                                        key={link.label}
-                                        href={link.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-between py-3 px-4 rounded-lg border border-nx-border
-                      hover:border-nx-cyan/30 hover:bg-nx-cyan/5 transition-all duration-300 group"
-                                    >
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-nx-text-muted group-hover:text-nx-cyan transition-colors text-sm">{link.icon}</span>
-                                            <span className="font-mono text-[10px] text-nx-text-muted tracking-wider">{link.label}</span>
-                                        </div>
-                                        <span className="font-mono text-xs text-nx-text-secondary group-hover:text-nx-cyan transition-colors">
-                                            {link.handle}
-                                        </span>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
+                            <div className="space-y-3">
+                                {socialLinks.map((link) => {
+                                    const IconComponent = link.icon;
+                                    return (
+                                        <motion.a
+                                            key={link.label}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className="flex items-center justify-between py-4 px-5 rounded-lg border border-nx-border/60
+                      hover:border-nx-cyan/50 hover:bg-nx-cyan/10 transition-all duration-300 group
+                      relative overflow-hidden"
+                                        >
+                                            {/* Glow effect on hover */}
+                                            <div className="absolute inset-0 bg-linear-to-r from-transparent via-nx-cyan/0 to-transparent opacity-0 group-hover:opacity-20 group-hover:animate-pulse transition-opacity duration-300" />
 
-                        {/* Signal status */}
-                        <div className="glass-panel rounded-xl p-6">
-                            <div className="flex items-center gap-2 mb-5 pb-3 border-b border-nx-border">
-                                <div className="w-1.5 h-1.5 bg-nx-cyan rounded-full" />
-                                <span className="font-mono text-[10px] text-nx-text-muted tracking-[0.2em]">SIGNAL STATUS</span>
-                            </div>
-                            <div className="space-y-3 font-mono text-xs">
-                                {[
-                                    { label: "Response time", value: "< 24h", color: "text-nx-green" },
-                                    { label: "Availability", value: "OPEN", color: "text-nx-green" },
-                                    { label: "Location", value: "SPAIN", color: "text-nx-text-secondary" },
-                                    { label: "Remote", value: "YES", color: "text-nx-green" },
-                                ].map((item) => (
-                                    <div key={item.label} className="flex justify-between items-center">
-                                        <span className="text-nx-text-muted">{item.label}</span>
-                                        <span className={item.color}>{item.value}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Signal strength visual */}
-                            <div className="mt-5 pt-4 border-t border-nx-border">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="font-mono text-[10px] text-nx-text-muted">SIGNAL STRENGTH</span>
-                                </div>
-                                <div className="flex items-end gap-1 h-6">
-                                    {[0.3, 0.5, 0.65, 0.8, 0.95].map((h, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="flex-1 bg-nx-cyan rounded-sm"
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${h * 100}%` }}
-                                            transition={{ delay: i * 0.1, duration: 0.5 }}
-                                            viewport={{ once: true }}
-                                            style={{ opacity: 0.4 + i * 0.15 }}
-                                        />
-                                    ))}
-                                </div>
+                                            <div className="flex items-center gap-4 relative z-10">
+                                                <div className="p-2 rounded-lg bg-nx-surface/50 group-hover:bg-nx-cyan/20 transition-all duration-300">
+                                                    <div className={`text-nx-cyan group-hover:scale-110 transition-transform duration-300`}>
+                                                        <IconComponent />
+                                                    </div>
+                                                </div>
+                                                <span className="font-mono text-[11px] font-semibold text-nx-text-secondary group-hover:text-nx-cyan transition-colors duration-300 tracking-wider">
+                                                    {link.label}
+                                                </span>
+                                            </div>
+                                            <span className="font-mono text-xs text-nx-text-secondary group-hover:text-nx-cyan transition-colors duration-300 relative z-10">
+                                                {link.handle}
+                                            </span>
+                                        </motion.a>
+                                    );
+                                })}
                             </div>
                         </div>
                     </motion.div>
