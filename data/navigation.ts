@@ -1,0 +1,1 @@
+export type Section = "hero" | "work" | "about" | "cv" | "contact"

@@ -25,7 +25,7 @@ const EmailIcon = () => (
     </svg>
 );
 
-export default function ContactSection({ onInView }: ContactSectionProps) {
+export default function Contact({ onInView }: ContactSectionProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { amount: 0.2 });
     const [formState, setFormState] = useState({

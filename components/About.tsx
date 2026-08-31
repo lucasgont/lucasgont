@@ -24,7 +24,7 @@ const techGrid = [
     "AWS", "Git", "FastAPI", "OpenAI",
 ];
 
-export default function AboutSection({ onInView }: AboutSectionProps) {
+export default function About({ onInView }: AboutSectionProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { amount: 0.2 });
 

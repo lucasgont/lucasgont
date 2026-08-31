@@ -90,7 +90,7 @@ function StatBar({ label, value, delay }: { label: string; value: number; delay:
     );
 }
 
-export default function ProjectsSection({ onInView }: ProjectsSectionProps) {
+export default function Work({ onInView }: ProjectsSectionProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { amount: 0.15 });
     const [selected, setSelected] = useState(0);
@@ -142,8 +142,8 @@ export default function ProjectsSection({ onInView }: ProjectsSectionProps) {
                             key={p.id}
                             onClick={() => setSelected(i)}
                             className={`relative px-5 py-3 font-mono text-xs tracking-wider transition-all duration-300 rounded-t-lg ${selected === i
-                                    ? "text-nx-text bg-nx-surface border border-nx-border-bright border-b-transparent"
-                                    : "text-nx-text-muted hover:text-nx-text-secondary border border-transparent hover:border-nx-border"
+                                ? "text-nx-text bg-nx-surface border border-nx-border-bright border-b-transparent"
+                                : "text-nx-text-muted hover:text-nx-text-secondary border border-transparent hover:border-nx-border"
                                 }`}
                         >
                             <span className={`mr-2 ${selected === i ? "text-nx-cyan" : "text-nx-text-muted/50"}`}>

@@ -1,37 +1,30 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
-import AnimatedBackground from "@/components/AnimatedBackground";
-import HUD from "@/components/HUD";
-import HeroSection from "@/components/HeroSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import AboutSection from "@/components/AboutSection";
-import CVSection from "@/components/CVSection";
-import ContactSection from "@/components/ContactSection";
+import { useState, useRef, useCallback } from "react"
+import { Section } from "@/data/navigation";
 
-type Section = "hero" | "projects" | "about" | "cv" | "contact";
+import AnimatedBackground from "@/components/AnimatedBackground"
+import Contact from "@/components/Contact"
+import Footer from "@/components/Footer"
+import About from "@/components/About"
+import Work from "@/components/Work"
+import Hero from "@/components/Hero"
+import HUD from "@/components/HUD"
+import CV from "@/components/CV"
 
 export default function Home() {
-    const [activeSection, setActiveSection] = useState<Section>("hero");
-    const [showHUD, setShowHUD] = useState(false);
-    const sectionsRef = useRef<Record<string, HTMLDivElement | null>>({});
+    const [activeSection, setActiveSection] = useState<Section>("hero")
+    const [showHUD, setShowHUD] = useState(false)
+    const sectionsRef = useRef<Record<string, HTMLDivElement | null>>({})
 
     const scrollTo = useCallback((section: string) => {
-        sectionsRef.current[section]?.scrollIntoView({ behavior: "smooth" });
-    }, []);
+        sectionsRef.current[section]?.scrollIntoView({ behavior: "smooth" })
+    }, [])
 
-    const handleHeroInView = useCallback(() => setActiveSection("hero"), []);
-    const handleProjectsInView = useCallback(
-        () => setActiveSection("projects"),
-        [],
-    );
-    const handleAboutInView = useCallback(() => setActiveSection("about"), []);
-    const handleCvInView = useCallback(() => setActiveSection("cv"), []);
-    const handleContactInView = useCallback(
-        () => setActiveSection("contact"),
-        [],
-    );
-    const handleLucasAppear = useCallback(() => setShowHUD(true), []);
+    const handleLucasAppear = useCallback(() => setShowHUD(true), [])
+
+    // Handle Section InView
+    const handleInView = (section: Section) => useCallback(() => setActiveSection(section), [])
 
     return (
         <>
@@ -39,65 +32,28 @@ export default function Home() {
             <HUD activeSection={activeSection} onNavigate={scrollTo} showHUD={showHUD} />
 
             <main className="relative z-10">
-                <div
-                    ref={(el) => {
-                        sectionsRef.current.hero = el;
-                    }}
-                >
-                    <HeroSection onNavigate={scrollTo} onInView={handleHeroInView} onLucasAppear={handleLucasAppear} />
+                <div ref={(el) => { sectionsRef.current.hero = el }}>
+                    <Hero onNavigate={scrollTo} onInView={handleInView("hero")} onLucasAppear={handleLucasAppear} />
                 </div>
 
-                <div
-                    ref={(el) => {
-                        sectionsRef.current.projects = el;
-                    }}
-                >
-                    <ProjectsSection onInView={handleProjectsInView} />
+                <div ref={(el) => { sectionsRef.current.work = el }}>
+                    <Work onInView={handleInView("work")} />
                 </div>
 
-                <div
-                    ref={(el) => {
-                        sectionsRef.current.about = el;
-                    }}
-                >
-                    <AboutSection onInView={handleAboutInView} />
+                <div ref={(el) => { sectionsRef.current.about = el }}>
+                    <About onInView={handleInView("about")} />
                 </div>
 
-                <div
-                    ref={(el) => {
-                        sectionsRef.current.cv = el;
-                    }}
-                >
-                    <CVSection onInView={handleCvInView} onNavigate={scrollTo} />
+                <div ref={(el) => { sectionsRef.current.cv = el }}>
+                    <CV onInView={handleInView("cv")} onNavigate={scrollTo} />
                 </div>
 
-                <div
-                    ref={(el) => {
-                        sectionsRef.current.contact = el;
-                    }}
-                >
-                    <ContactSection onInView={handleContactInView} />
+                <div ref={(el) => { sectionsRef.current.contact = el }}>
+                    <Contact onInView={handleInView("contact")} />
                 </div>
 
-                {/* Footer */}
-                <footer className="relative py-5 px-6">
-                    <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 flex items-center justify-center">
-                                <svg width="12" height="12" viewBox="0 0 24 24" className="text-nx-cyan/80">
-                                    <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                                </svg>
-                            </div>
-                            <span className="font-mono text-[10px] text-nx-text-secondary/80 tracking-[0.2em]">
-                                &copy; 2026 LUCAS GONTIJO — PORTFOLIO
-                            </span>
-                        </div>
-                        <span className="font-mono text-[10px] text-nx-text-secondary/80 tracking-wider">
-                            BUILT WITH NEXT.JS + FRAMER MOTION
-                        </span>
-                    </div>
-                </footer>
+                <Footer />
             </main>
         </>
-    );
+    )
 }

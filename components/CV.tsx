@@ -94,7 +94,7 @@ const itemVariants = {
     },
 };
 
-export default function CVSection({ onInView, onNavigate }: CVSectionProps) {
+export default function CV({ onInView, onNavigate }: CVSectionProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { amount: 0.2 });
 
