@@ -7,7 +7,7 @@ interface ProjectsSectionProps {
     onInView: () => void;
 }
 
-interface Project {
+interface WorkInterface {
     id: string;
     name: string;
     tagline: string;
@@ -21,7 +21,7 @@ interface Project {
     image: string;
 }
 
-const projects: Project[] = [
+const work: WorkInterface[] = [
     {
         id: "vaultsync",
         name: "VAULTSYNC",
@@ -99,7 +99,7 @@ export default function Work({ onInView }: ProjectsSectionProps) {
         if (isInView) onInView();
     }, [isInView, onInView]);
 
-    const project = projects[selected];
+    const project = work[selected];
 
     return (
         <section
@@ -137,7 +137,7 @@ export default function Work({ onInView }: ProjectsSectionProps) {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="flex gap-2 mb-8"
                 >
-                    {projects.map((p, i) => (
+                    {work.map((p, i) => (
                         <button
                             key={p.id}
                             onClick={() => setSelected(i)}
