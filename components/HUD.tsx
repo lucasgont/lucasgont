@@ -55,7 +55,7 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
                         key={section}
                         onClick={() => onNavigate(section)}
                         className="group relative flex items-center cursor-pointer transition-transform duration-300 w-25 h-5"
-                        aria-label={`Navigate to ${hudSection.name}`}
+                        aria-label={`Navigate to ${sections[section].name}`}
                     >
                         {/* Line connector */}
                         {i < navSections.length - 1 && (
@@ -80,7 +80,7 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
                             ? "text-nx-cyan opacity-100 translate-x-0"
                             : "text-nx-text-muted opacity-0 -translate-x-2 group-hover:text-nx-cyan group-hover:opacity-100 group-hover:translate-x-0"
                             }`}>
-                            {hudSection.name}
+                            {sections[section].name}
                         </span>
                     </button>
                 ))}
