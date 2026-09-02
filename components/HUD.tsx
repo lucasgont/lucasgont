@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 
-import { HUDItem, Section, sections, navSections } from "@/data/navigation"
+import { Section, sections, navSections } from "@/data/navigation"
 
 export default function HUD({ activeSection, onNavigate, showHUD = false }: {
     activeSection: Section
@@ -11,6 +11,13 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
     showHUD?: boolean
 }) {
     const [scrollProgress, setScrollProgress] = useState(0)
+    const [isHudInitialMount, setIsHudInitialMount] = useState(true)
+
+    useEffect(() => {
+        if (showHUD && isHudInitialMount) {
+            setIsHudInitialMount(false)
+        }
+    }, [showHUD, isHudInitialMount])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,81 +30,90 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
 
     if (!showHUD) return null
 
-    const hudSection: HUDItem = sections[activeSection]
-
     return (
-        <div className="fixed inset-0 z-50 pointer-events-none">
-            {/* === TOP BAR === */}
-            <div className="absolute top-0 left-0 right-0 h-12 flex items-center justify-between px-4 sm:px-8">
-                {/* Center: Section indicator */}
-                <div className="absolute left-1/2 -translate-x-1/2 hidden sm:block">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeSection}
-                            initial={{ opacity: 0, y: -8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 8 }}
-                            transition={{ duration: 0.25 }}
-                            className="flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] select-none"
+        <motion.div
+            className="fixed inset-0 z-50 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+            {/* === NAVBAR CONTAINER === */}
+            <div className="absolute top-0 left-0 right-0 z-50">
+                {/* Glass panel navbar - backdrop */}
+                <div className={`absolute inset-x-0 top-0 h-16 bg-linear-to-b from-nx-cyan/5 via-nx-bg/10 to-nx-bg/5 backdrop-blur-md`} />
+
+                {/* TOP NAV - Navigation buttons */}
+                <div className={`absolute z-55 top-0 left-0 right-0 flex items-center justify-center px-4 sm:px-8 h-16 pointer-events-auto`}>
+                    <div className="flex items-center gap-1">
+                        {/* Home Button */}
+                        <button
+                            onClick={() => onNavigate("hero")}
+                            className="group relative px-4 py-2 cursor-pointer transition-all duration-300"
+                            aria-label="Navigate to home"
+                            title="Home"
                         >
-                            <span className="text-nx-cyan">{hudSection.number}</span>
-                            <div className="w-6 h-px bg-nx-border-bright" />
-                            <span className="text-nx-text-muted">{hudSection.name}</span>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-            </div>
-
-            {/* === LEFT SIDE NAV === */}
-            <div className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 pointer-events-auto">
-                {navSections.map((section, i) => (
-                    <button
-                        key={section}
-                        onClick={() => onNavigate(section)}
-                        className="group relative flex items-center cursor-pointer transition-transform duration-300 w-25 h-5"
-                        aria-label={`Navigate to ${sections[section].name}`}
-                    >
-                        {/* Line connector */}
-                        {i < navSections.length - 1 && (
-                            <div className="absolute top-full left-1 -translate-x-1/2 w-px h-6 bg-nx-border transition-colors duration-300 group-hover:bg-nx-cyan/40" />
-                        )}
-                        {/* Dot */}
-                        <div className="relative">
-                            <div
-                                className={`w-2 h-2 transition-all duration-300 ${activeSection === section
-                                    ? "bg-nx-cyan scale-125 shadow-[0_0_10px_rgba(0,212,255,0.5)]"
-                                    : "bg-nx-text-muted/50 group-hover:bg-nx-cyan group-hover:scale-150 group-hover:shadow-[0_0_15px_rgba(0,212,255,0.7)]"
-                                    }`}
-                                style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+                            {/* Animated background on hover/active */}
+                            <motion.div
+                                animate={{
+                                    opacity: activeSection === "hero" ? 1 : 0,
+                                    scale: activeSection === "hero" ? 1 : 0.95
+                                }}
+                                transition={{ duration: 0.3 }}
+                                className="absolute inset-0 bg-linear-to-r from-nx-cyan/5 via-nx-cyan/10 to-nx-cyan/5 rounded-2xl border border-nx-cyan/10"
                             />
-                            {activeSection === section && (
-                                <div className="absolute inset-0 w-2 h-2 bg-nx-cyan/30 pulse-ring"
-                                    style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }} />
-                            )}
-                        </div>
-                        {/* Label */}
-                        <span className={`absolute left-6 font-mono text-[9px] tracking-[0.15em] whitespace-nowrap transition-all duration-300 select-none ${activeSection === section
-                            ? "text-nx-cyan opacity-100 translate-x-0"
-                            : "text-nx-text-muted opacity-0 -translate-x-2 group-hover:text-nx-cyan group-hover:opacity-100 group-hover:translate-x-0"
-                            }`}>
-                            {sections[section].name}
-                        </span>
-                    </button>
-                ))}
-            </div>
 
-            {/* === BOTTOM BAR === */}
-            <div className="absolute bottom-6 left-0 right-0 h-10 flex items-center justify-between px-4 sm:px-8">
-                {/* Scroll progress bar */}
-                <div className="absolute top-0 left-0 right-0 h-px bg-nx-border/50 hidden sm:block">
-                    <motion.div
-                        className="h-full bg-linear-to-r from-nx-cyan/0 via-nx-cyan to-nx-cyan/0"
-                        style={{
-                            width: "20%",
-                            transform: `translateX(${scrollProgress * 400}%)`
-                        }}
-                        transition={{ duration: 0.1 }}
-                    />
+                            {/* Home Icon */}
+                            <span className={`relative font-mono font-semibold transition-colors duration-300 select-none ${activeSection === "hero"
+                                ? "text-nx-cyan"
+                                : "text-nx-text-secondary group-hover:text-nx-cyan"
+                                }`}>
+                                ⌂
+                            </span>
+                        </button>
+
+                        {/* Navigation Sections */}
+                        {navSections.filter(s => s !== "hero").map((section) => (
+                            <button
+                                key={section}
+                                onClick={() => onNavigate(section)}
+                                className="group relative px-4 py-1.5 cursor-pointer transition-all duration-300"
+                                aria-label={`Navigate to ${sections[section].name}`}
+                            >
+                                {/* Animated background on hover/active */}
+                                <motion.div
+                                    animate={{
+                                        opacity: activeSection === section ? 1 : 0,
+                                        scale: activeSection === section ? 1 : 0.95
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                    className="absolute inset-0 bg-linear-to-r from-nx-cyan/5 via-nx-cyan/10 to-nx-cyan/5 rounded-2xl border border-nx-cyan/10"
+                                />
+
+                                {/* Text */}
+                                <span className={`relative font-mono text-xs font-semibold tracking-[0.15em] transition-colors duration-300 select-none ${activeSection === section
+                                    ? "text-nx-cyan"
+                                    : "text-nx-text-secondary group-hover:text-nx-cyan"
+                                    }`}>
+                                    {sections[section].name}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Progress top line - Scroll indicator */}
+                <div className={`absolute z-55 top-16 left-0 right-0 h-8 flex items-center justify-between px-4 sm:px-8 pointer-events-auto`}>
+                    {/* Scroll progress bar */}
+                    <div className="absolute top-0 left-0 right-0 h-px bg-nx-border/50 hidden sm:block">
+                        <motion.div
+                            className="h-full bg-linear-to-r from-nx-cyan/0 via-nx-cyan to-nx-cyan/0"
+                            style={{
+                                width: "20%",
+                                transform: `translateX(${scrollProgress * 400}%)`
+                            }}
+                            transition={{ duration: 0.1 }}
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -118,6 +134,6 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
             <svg className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 w-18 h-18 text-nx-cyan/25" viewBox="0 0 32 32">
                 <path d="M32 24v8h-8" fill="none" stroke="currentColor" strokeWidth="1" />
             </svg>
-        </div>
+        </motion.div>
     )
 }

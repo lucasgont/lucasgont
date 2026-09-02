@@ -63,14 +63,14 @@ html {
 
 /* ===== Glass Panel ===== */
 .glass-panel {
-    background: rgba(19, 22, 28, 0.7);
+    background: rgba(19, 22, 28, 1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .glass-panel-bright {
-    background: rgba(26, 30, 38, 0.8);
+    background: rgba(26, 30, 38, 1);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -78,7 +78,7 @@ html {
 
 /* ===== Glow Effects ===== */
 .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 60px rgba(0, 212, 255, 0.05);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.15), 0 0 12px rgba(0, 212, 255, 0.05);
 }
 
 .glow-cyan-strong {
@@ -128,15 +128,6 @@ html {
     syntax: '<angle>';
     initial-value: 0deg;
     inherits: false;
-}
-
-/* ===== Scanlines ===== */
-.scanlines {
-    background: repeating-linear-gradient(0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.08) 2px,
-            rgba(0, 0, 0, 0.08) 4px);
 }
 
 /* ===== Noise ===== */

@@ -37,7 +37,7 @@ export default function AnimatedBackground() {
         window.addEventListener("resize", resize)
 
         // Init nodes
-        const nodeCount = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 15000))
+        const nodeCount = Math.min(100, Math.floor((window.innerWidth * window.innerHeight) / 15000))
         nodesRef.current = Array.from({ length: nodeCount }, () => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
@@ -155,14 +155,6 @@ export default function AnimatedBackground() {
             {/* Canvas network */}
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-            {/* Scanning line */}
-            <div
-                className="absolute left-0 right-0 h-0.5 animate-scan-line"
-                style={{
-                    background: "linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.08), transparent)",
-                }}
-            />
-
             {/* Ambient glow spots */}
             <div
                 className="absolute top-1/4 -left-1/4 w-[50vw] h-[50vw] rounded-full animate-float"
@@ -180,9 +172,6 @@ export default function AnimatedBackground() {
 
             {/* Noise grain */}
             <div className="absolute inset-0 noise-overlay opacity-[0.025]" />
-
-            {/* Scanlines */}
-            <div className="absolute inset-0 scanlines opacity-[0.03]" />
 
             {/* Vignette */}
             <div

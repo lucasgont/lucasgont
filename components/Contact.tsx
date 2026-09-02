@@ -102,7 +102,7 @@ export default function Contact({ onInView }: ContactSectionProps) {
                         GET IN TOUCH
                     </h2>
                     <p className="font-mono text-sm text-nx-text-secondary mt-3">
-                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of. Let's connect!
+                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of.
                     </p>
                 </motion.div>
 
@@ -140,8 +140,8 @@ export default function Contact({ onInView }: ContactSectionProps) {
                                             <div className="absolute inset-0 bg-linear-to-r from-transparent via-nx-cyan/0 to-transparent opacity-0 group-hover:opacity-20 group-hover:animate-pulse transition-opacity duration-300" />
 
                                             <div className="flex items-center gap-4 relative z-10">
-                                                <div className="p-2 rounded-lg bg-nx-surface/50 group-hover:bg-nx-cyan/20 transition-all duration-300">
-                                                    <div className={`text-nx-cyan group-hover:scale-110 transition-transform duration-300`}>
+                                                <div className="p-2 rounded-lg">
+                                                    <div className="text-nx-cyan">
                                                         <IconComponent />
                                                     </div>
                                                 </div>

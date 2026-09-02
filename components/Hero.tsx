@@ -48,8 +48,8 @@ export default function Hero({ onNavigate, onInView, onLucasAppear }: {
     const ref = useRef(null)
     const isInView = useInView(ref, { amount: 0.5 })
     const [phase, setPhase] = useState(0)
-    const [hoveredItem, setHoveredItem] = useState<number | null>(null)
     const [bootIndex, setBootIndex] = useState(0)
+    const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
     useEffect(() => {
         if (isInView) onInView()
@@ -89,15 +89,6 @@ export default function Hero({ onNavigate, onInView, onLucasAppear }: {
             ref={ref}
             className="relative min-h-screen flex flex-col items-center justify-center px-6"
         >
-            {/* Hex grid decorative element */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                <div className="relative w-150 h-150 opacity-[0.03]">
-                    <div className="absolute inset-0 border border-nx-cyan rounded-full animate-hex-rotate" />
-                    <div className="absolute inset-12 border border-nx-cyan/50 rounded-full animate-hex-rotate" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
-                    <div className="absolute inset-24 border border-nx-cyan/30 rounded-full animate-hex-rotate" style={{ animationDuration: "40s" }} />
-                </div>
-            </div>
-
             <div className="relative z-10 max-w-3xl w-full">
                 {isBootPhase ? (
                     <motion.div
@@ -146,7 +137,7 @@ export default function Hero({ onNavigate, onInView, onLucasAppear }: {
                                 className="inline-flex items-center gap-3 mb-4 px-4 py-2 rounded-full border border-nx-cyan/20 bg-nx-cyan/5"
                             >
                                 <span className="w-1.5 h-1.5 rounded-full bg-nx-cyan animate-pulse" />
-                                <span className="font-mono text-[10px] tracking-[0.3em] text-nx-cyan">SEVILLE, SPAIN ─ REMOTE</span>
+                                <span className="font-mono text-[10px] tracking-[0.3em] text-nx-cyan">SEVILLE, SPAIN</span>
                             </motion.div>
 
                             {/* Main name */}
@@ -205,74 +196,7 @@ export default function Hero({ onNavigate, onInView, onLucasAppear }: {
                             </motion.p>
                         </motion.div>
 
-                        {/* Phase 3: Navigation cards */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: phase >= 3 ? 1 : 0 }}
-                            transition={{ duration: 0.6 }}
-                            className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-16"
-                            style={{ pointerEvents: phase >= 3 ? "auto" : "none" }}
-                        >
-                            {menuItems.map((item, i) => (
-                                <motion.button
-                                    key={item.section}
-                                    initial={{ opacity: 0, y: 25 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 1.8 + i * 0.15, duration: 0.7, ease: "easeOut" }}
-                                    onClick={() => onNavigate(item.section)}
-                                    onMouseEnter={() => setHoveredItem(i)}
-                                    onMouseLeave={() => setHoveredItem(null)}
-                                    className={`group relative p-5 text-left transition-all duration-300 rounded-lg overflow-hidden cursor-pointer select-none
-                                        ${hoveredItem === i
-                                            ? "glass-panel-bright glow-cyan"
-                                            : "glass-panel hover:border-nx-cyan/20"
-                                        }`}
-                                >
-                                    {/* Animated top border on hover */}
-                                    <div className={`absolute top-0 left-0 right-0 h-px transition-all duration-700 ${hoveredItem === i
-                                        ? "bg-linear-to-r from-transparent via-nx-cyan to-transparent opacity-100"
-                                        : "opacity-0"
-                                        }`} />
 
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <span className={`text-lg transition-colors duration-300 ${hoveredItem === i ? "text-nx-cyan" : "text-nx-text-muted"
-                                            }`}>
-                                            {item.icon}
-                                        </span>
-                                        <span className={`font-mono text-xs sm:text-sm font-semibold tracking-wider transition-colors duration-300 ${hoveredItem === i ? "text-nx-text" : "text-nx-text-secondary"
-                                            }`}>
-                                            {item.label}
-                                        </span>
-                                    </div>
-
-                                    <p className="font-mono text-[10px] text-nx-text-secondary/50 leading-relaxed">
-                                        {item.desc}
-                                    </p>
-
-                                    {/* Arrow indicator */}
-                                    <div className={`absolute bottom-4 right-4 transition-all duration-300 ${hoveredItem === i ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
-                                        }`}>
-                                        <span className="text-nx-cyan text-sm">→</span>
-                                    </div>
-                                </motion.button>
-                            ))}
-                        </motion.div>
-
-                        {/* Phase 4: Scroll indicator */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: phase >= 4 ? 1 : 0 }}
-                            transition={{ duration: 1.2, delay: 0.2 }}
-                            className="flex flex-col items-center gap-3"
-                            style={{ pointerEvents: phase >= 4 ? "auto" : "none" }}
-                        >
-                            <span className="font-mono text-[10px] text-nx-text-muted/70 tracking-[0.2em] select-none">SCROLL TO EXPLORE</span>
-                            <motion.div
-                                animate={{ y: [0, 8, 0] }}
-                                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                                className="w-px h-8 bg-linear-to-b from-nx-cyan/40 to-transparent"
-                            />
-                        </motion.div>
                     </>
                 )}
             </div>
