@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-
-import { menuItems, Section } from "@/data/navigation"
+import { contactIcons } from "@/lib/contact"
+import { contactLinks } from "@/data/contact"
 
 const bootLines = [
     { text: "Connecting to the server...", delay: 200 },
@@ -40,8 +40,7 @@ function useTypewriter(text: string, speed: number = 30, delay: number = 0) {
     return { displayed, isDone }
 }
 
-export default function Hero({ onNavigate, onInView, onLucasAppear }: {
-    onNavigate: (section: Section) => void
+export default function Hero({ onInView, onLucasAppear }: {
     onInView: () => void
     onLucasAppear: () => void
 }) {
@@ -49,7 +48,6 @@ export default function Hero({ onNavigate, onInView, onLucasAppear }: {
     const isInView = useInView(ref, { amount: 0.5 })
     const [phase, setPhase] = useState(0)
     const [bootIndex, setBootIndex] = useState(0)
-    const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
     useEffect(() => {
         if (isInView) onInView()
@@ -66,8 +64,7 @@ export default function Hero({ onNavigate, onInView, onLucasAppear }: {
         const timers = [
             setTimeout(() => setPhase(1), 300),   // Boot text starts
             setTimeout(() => setPhase(2), 2400),   // Title reveal
-            setTimeout(() => setPhase(3), 3200),   // Menu items
-            setTimeout(() => setPhase(4), 4000),   // Everything ready
+            setTimeout(() => setPhase(3), 3500),   // Contact links
         ]
         return () => timers.forEach(clearTimeout)
     }, [])
@@ -194,9 +191,36 @@ export default function Hero({ onNavigate, onInView, onLucasAppear }: {
                                 <br />
                                 Building with curiosity and delivering with intention.
                             </motion.p>
+
+                            {/* Phase 3: Contact Links */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: phase >= 3 ? 1 : 0, y: phase >= 3 ? 0 : 20 }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="flex gap-3 mt-6 items-center justify-end"
+                                style={{ pointerEvents: phase >= 3 ? "auto" : "none" }}
+                            >
+                                {contactLinks.map((link, index) => {
+                                    const Icon = contactIcons[link.label]
+                                    return (
+                                        <motion.a
+                                            key={link.label}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            animate={{ opacity: phase >= 3 ? 1 : 0, scale: phase >= 3 ? 1 : 0.8 }}
+                                            transition={{ delay: 0.1 * index, duration: 0.2 }}
+                                            whileHover={{ color: "#22D3EE" }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className="text-nx-text-secondary p-1"
+                                        >
+                                            <Icon />
+                                        </motion.a>
+                                    )
+                                })}
+                            </motion.div>
                         </motion.div>
-
-
                     </>
                 )}
             </div>

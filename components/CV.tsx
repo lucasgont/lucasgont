@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Section } from "@/data/navigation";
 
 interface CVSectionProps {
     onInView: () => void;
-    onNavigate?: (section: string) => void;
+    onNavigate?: (section: Section) => void;
 }
 
 interface Experience {

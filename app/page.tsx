@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
 import { useState, useRef, useCallback } from "react"
-import { Section } from "@/data/navigation";
+import { Section } from "@/data/navigation"
 
 import AnimatedBackground from "@/components/AnimatedBackground"
 import Contact from "@/components/Contact"
@@ -15,9 +15,9 @@ import CV from "@/components/CV"
 export default function Home() {
     const [activeSection, setActiveSection] = useState<Section>("hero")
     const [showHUD, setShowHUD] = useState(false)
-    const sectionsRef = useRef<Record<string, HTMLDivElement | null>>({})
+    const sectionsRef = useRef<Partial<Record<Section, HTMLDivElement | null>>>({})
 
-    const scrollTo = useCallback((section: string) => {
+    const scrollTo = useCallback((section: Section) => {
         sectionsRef.current[section]?.scrollIntoView({ behavior: "smooth" })
     }, [])
 

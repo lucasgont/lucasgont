@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
-import { Section, sections, navSections } from "@/data/navigation"
+import { Section, navSections } from "@/data/navigation"
 
 export default function HUD({ activeSection, onNavigate, showHUD = false }: {
     activeSection: Section
-    onNavigate: (section: string) => void
+    onNavigate: (section: Section) => void
     showHUD?: boolean
 }) {
     const [scrollProgress, setScrollProgress] = useState(0)
@@ -77,7 +77,7 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
                                 key={section}
                                 onClick={() => onNavigate(section)}
                                 className="group relative px-4 py-1.5 cursor-pointer transition-all duration-300"
-                                aria-label={`Navigate to ${sections[section].name}`}
+                                aria-label={`Navigate to ${section.toUpperCase()} section`}
                             >
                                 {/* Animated background on hover/active */}
                                 <motion.div
@@ -94,7 +94,7 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
                                     ? "text-nx-cyan"
                                     : "text-nx-text-secondary group-hover:text-nx-cyan"
                                     }`}>
-                                    {sections[section].name}
+                                    {section.toUpperCase()}
                                 </span>
                             </button>
                         ))}
