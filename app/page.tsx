@@ -33,7 +33,7 @@ export default function Home() {
 
             <main className="relative z-10">
                 <div ref={(el) => { sectionsRef.current.hero = el }}>
-                    <Hero onNavigate={scrollTo} onInView={handleInView("hero")} onLucasAppear={handleLucasAppear} />
+                    <Hero onInView={handleInView("hero")} onLucasAppear={handleLucasAppear} />
                 </div>
 
                 <div ref={(el) => { sectionsRef.current.work = el }}>
