@@ -36,7 +36,7 @@ export default function Home() {
                     <Hero onInView={handleInView("hero")} onLucasAppear={handleLucasAppear} />
                 </div>
 
-                {/* <div ref={(el) => { sectionsRef.current.work = el }}>
+                <div ref={(el) => { sectionsRef.current.work = el }}>
                     <Work onInView={handleInView("work")} />
                 </div>
 
@@ -46,7 +46,7 @@ export default function Home() {
 
                 <div ref={(el) => { sectionsRef.current.cv = el }}>
                     <CV onInView={handleInView("cv")} onNavigate={scrollTo} />
-                </div> */}
+                </div>
 
                 <div ref={(el) => { sectionsRef.current.contact = el }}>
                     <Contact onInView={handleInView("contact")} />
