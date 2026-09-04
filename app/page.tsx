@@ -45,7 +45,7 @@ export default function Home() {
                 </div>
 
                 <div ref={(el) => { sectionsRef.current.cv = el }}>
-                    <CV onInView={handleInView("cv")} onNavigate={scrollTo} />
+                    <CV onInView={handleInView("cv")} />
                 </div>
 
                 <div ref={(el) => { sectionsRef.current.contact = el }}>
