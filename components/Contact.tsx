@@ -24,9 +24,9 @@ export default function Contact({ onInView }: {
     return (
         <section
             ref={ref}
-            className="min-h-screen flex flex-col justify-center px-4 sm:px-6 py-24 sm:py-32"
+            className="min-h-screen flex flex-col justify-center px-6 py-24"
         >
-            <div className="max-w-4xl mx-auto w-full">
+            <div className="max-w-6xl mx-auto w-full">
                 {/* Section header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -49,22 +49,22 @@ export default function Contact({ onInView }: {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1">
+                <div className="w-full">
                     {/* Direct links */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 }}
-                        className="space-y-5"
+                        className="space-y-2 sm:space-y-3"
                     >
-                        <div className="glass-panel rounded-xl p-8">
-                            <div className="flex items-center gap-2 mb-6 pb-4 border-b border-nx-border">
+                        <div className="glass-panel rounded-lg sm:rounded-xl p-4 sm:p-6">
+                            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-nx-border">
                                 <div className="w-1.5 h-1.5 bg-nx-cyan rounded-full" />
-                                <span className="font-mono text-[10px] text-nx-cyan tracking-[0.2em] font-semibold">DIRECT LINKS</span>
+                                <span className="font-mono sm:text-[10px] text-[8px] text-nx-cyan tracking-[0.2em] font-semibold">DIRECT LINKS</span>
                             </div>
 
-                            <div className="space-y-3">
+                            <div className="sm:space-y-3 space-y-2">
                                 {contactLinks.map((link) => {
                                     const IconComponent = contactIcons[link.label]
                                     return (
@@ -75,24 +75,24 @@ export default function Contact({ onInView }: {
                                             rel="noopener noreferrer"
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
-                                            className="flex items-center justify-between py-4 px-5 rounded-lg border border-nx-border/60 hover:border-nx-cyan/50 hover:bg-nx-cyan/10 transition-all duration-300 group relative overflow-hidden"
+                                            className="flex items-center gap-3 py-2 sm:py-3 px-3 sm:px-4 rounded-lg border border-nx-border/60 hover:border-nx-cyan/50 hover:bg-nx-cyan/10 transition-all duration-300 group relative overflow-hidden"
                                         >
                                             {/* Glow effect on hover */}
                                             <div className="absolute inset-0 bg-linear-to-r from-transparent via-nx-cyan/0 to-transparent opacity-0 group-hover:opacity-20 group-hover:animate-pulse transition-opacity duration-300" />
 
-                                            <div className="flex items-center gap-4 relative z-10">
-                                                <div className="p-2 rounded-lg">
-                                                    <div className="text-nx-cyan">
-                                                        {IconComponent && <IconComponent />}
-                                                    </div>
+                                            <div className="p-1.5 sm:p-2 rounded-lg shrink-0">
+                                                <div className="text-nx-cyan text-sm sm:text-base">
+                                                    {IconComponent && <IconComponent />}
                                                 </div>
-                                                <span className="font-mono text-[11px] font-semibold text-nx-text-secondary group-hover:text-nx-cyan transition-colors duration-300 tracking-wider">
+                                            </div>
+                                            <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-4">
+                                                <span className="font-mono text-[12px] sm:text-[14px] font-semibold text-nx-text-secondary group-hover:text-nx-cyan transition-colors duration-300 tracking-wider block truncate">
                                                     {link.label}
                                                 </span>
+                                                <span className="font-mono text-[10px] sm:text-[12px] text-nx-text-secondary/70 group-hover:text-nx-cyan/70 transition-colors duration-300 block truncate">
+                                                    {link.handle}
+                                                </span>
                                             </div>
-                                            <span className="font-mono text-xs text-nx-text-secondary group-hover:text-nx-cyan transition-colors duration-300 relative z-10">
-                                                {link.handle}
-                                            </span>
                                         </motion.a>
                                     )
                                 })}

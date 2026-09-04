@@ -118,12 +118,12 @@ export default function Hero({ onInView, onLucasAppear }: {
                     </motion.div>
                 ) : (
                     <>
-                        {/* Phase 2: Main title */}
+                        {/* Phase 2: Main title (tablet and up) */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: phase >= 2 ? 1 : 0, scale: phase >= 2 ? 1 : 0.95 }}
                             transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="mb-12"
+                            className="hidden sm:block mb-12"
                             style={{ pointerEvents: phase >= 2 ? "auto" : "none" }}
                         >
                             {/* Classification badge */}
@@ -139,12 +139,12 @@ export default function Hero({ onInView, onLucasAppear }: {
 
                             {/* Main name */}
                             <div className="relative mb-3">
-                                <h1 className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-nx-text">
+                                <h1 className="text-8xl md:text-9xl font-bold tracking-tighter text-nx-text">
                                     {titleText.displayed}
                                     {!titleText.isDone && <span className="text-nx-cyan animate-blink">|</span>}
                                 </h1>
                                 {/* Glow behind text */}
-                                <div className="absolute inset-0 text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-nx-cyan/5 blur-2xl select-none pointer-events-none" aria-hidden>
+                                <div className="absolute inset-0 text-8xl md:text-9xl font-bold tracking-tighter text-nx-cyan/5 blur-2xl select-none pointer-events-none" aria-hidden>
                                     LUCAS
                                 </div>
                             </div>
@@ -161,13 +161,13 @@ export default function Hero({ onInView, onLucasAppear }: {
                                     animate={{ scaleX: 1 }}
                                     transition={{ delay: 0.6, duration: 2, ease: "easeOut" }}
                                     style={{ originX: 0 }}
-                                    className="h-px w-12 sm:w-20 bg-linear-to-r from-nx-cyan to-transparent"
+                                    className="h-px w-20 bg-linear-to-r from-nx-cyan to-transparent"
                                 />
                                 <motion.span
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.6, duration: 2.5, ease: "easeInOut" }}
-                                    className="font-mono text-sm sm:text-base tracking-[0.2em] text-nx-text-secondary whitespace-nowrap mx-4"
+                                    className="font-mono text-base tracking-[0.2em] text-nx-text-secondary whitespace-nowrap mx-4"
                                 >
                                     FULLSTACK DEVELOPER
                                 </motion.span>
@@ -216,6 +216,88 @@ export default function Hero({ onInView, onLucasAppear }: {
                                             className="text-nx-text-secondary p-1"
                                         >
                                             <Icon />
+                                        </motion.a>
+                                    )
+                                })}
+                            </motion.div>
+                        </motion.div>
+
+                        {/* Phase 2: Main title (phone only) — compact, centered stack */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: phase >= 2 ? 1 : 0, scale: phase >= 2 ? 1 : 0.95 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="sm:hidden flex flex-col items-center gap-8 text-center w-full"
+                            style={{ pointerEvents: phase >= 2 ? "auto" : "none" }}
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, y: -15 }}
+                                animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : -15 }}
+                                transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                                className="inline-flex items-center gap-3 px-3 py-1.5 rounded-full border border-nx-cyan/20 bg-nx-cyan/5"
+                            >
+                                <span className="w-1.5 h-1.5 rounded-full bg-nx-cyan animate-pulse" />
+                                <span className="font-mono text-[10px] tracking-[0.3em] text-nx-cyan">SEVILLE, SPAIN</span>
+                            </motion.div>
+
+                            <div className="flex flex-col items-center gap-3">
+                                <div className="relative">
+                                    <h1 className="text-7xl font-bold tracking-tighter text-nx-text">
+                                        {titleText.displayed}
+                                        {!titleText.isDone && <span className="text-nx-cyan animate-blink">|</span>}
+                                    </h1>
+                                    <div className="absolute inset-0 text-7xl font-bold tracking-tighter text-nx-cyan/5 blur-2xl select-none pointer-events-none" aria-hidden>
+                                        LUCAS
+                                    </div>
+                                </div>
+
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: phase >= 2 ? 1 : 0 }}
+                                    transition={{ delay: 0.6, duration: 0.8 }}
+                                    className="flex items-center gap-3 w-full max-w-56"
+                                >
+                                    <span className="h-px flex-1 bg-linear-to-r from-transparent to-nx-cyan/70" />
+                                    <span className="font-mono text-[11px] tracking-[0.3em] text-nx-cyan/80 whitespace-nowrap">FULLSTACK DEV</span>
+                                    <span className="h-px flex-1 bg-linear-to-l from-transparent to-nx-cyan/70" />
+                                </motion.div>
+
+                                <motion.p
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 10 }}
+                                    transition={{ delay: 1, duration: 0.9, ease: "easeOut" }}
+                                    className="max-w-72 font-mono text-xs text-nx-text-secondary/60 leading-relaxed"
+                                >
+                                    I turn complex requirements and business needs into practical, production-ready solutions. Building with curiosity and delivering with intention.
+                                </motion.p>
+                            </div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: phase >= 3 ? 1 : 0, y: phase >= 3 ? 0 : 20 }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="flex flex-col gap-3 items-stretch w-full max-w-72"
+                                style={{ pointerEvents: phase >= 3 ? "auto" : "none" }}
+                            >
+                                {contactLinks.map((link, index) => {
+                                    const Icon = contactIcons[link.label]
+                                    return (
+                                        <motion.a
+                                            key={link.label}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: phase >= 3 ? 1 : 0, y: phase >= 3 ? 0 : 10 }}
+                                            transition={{ delay: 0.1 * index, duration: 0.3 }}
+                                            whileTap={{ scale: 0.97 }}
+                                            className="flex items-center gap-3 px-4 py-3 rounded-lg border border-nx-border/60 bg-nx-surface/40 text-left"
+                                        >
+                                            <span className="text-nx-cyan shrink-0">
+                                                <Icon />
+                                            </span>
+                                            <span className="font-mono text-xs tracking-[0.15em] text-nx-text capitalize">{link.label}</span>
+                                            <span className="ml-auto font-mono text-[10px] text-nx-text-secondary/60 truncate">{link.handle}</span>
                                         </motion.a>
                                     )
                                 })}

@@ -44,7 +44,7 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
 
                 {/* TOP NAV - Navigation buttons */}
                 <div className={`absolute z-55 top-0 left-0 right-0 flex items-center justify-center px-4 sm:px-8 h-16 pointer-events-auto`}>
-                    <div className="flex items-center gap-1">
+                    <nav className="flex items-center sm:gap-1 gap-0">
                         {/* Home Button */}
                         <button
                             onClick={() => onNavigate("hero")}
@@ -98,13 +98,13 @@ export default function HUD({ activeSection, onNavigate, showHUD = false }: {
                                 </span>
                             </button>
                         ))}
-                    </div>
+                    </nav>
                 </div>
 
                 {/* Progress top line - Scroll indicator */}
                 <div className={`absolute z-55 top-16 left-0 right-0 h-8 flex items-center justify-between px-4 sm:px-8 pointer-events-auto`}>
                     {/* Scroll progress bar */}
-                    <div className="absolute top-0 left-0 right-0 h-px bg-nx-border/50 hidden sm:block">
+                    <div className="absolute top-0 left-0 right-0 h-px transparent block">
                         <motion.div
                             className="h-full bg-linear-to-r from-nx-cyan/0 via-nx-cyan to-nx-cyan/0"
                             style={{

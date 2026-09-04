@@ -35,7 +35,7 @@ export default function About({ onInView }: AboutSectionProps) {
     return (
         <section
             ref={ref}
-            className="min-h-screen flex flex-col justify-center px-4 sm:px-6 py-24 sm:py-32"
+            className="min-h-screen flex flex-col justify-center px-6 py-24"
         >
             <div className="max-w-6xl mx-auto w-full">
                 {/* Section header */}
